@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<!--es6 EcmaScript 6 javascript
+通用版本 EcmaScript 5.x
+最多用的还是EcmaScript 6.x 基本上6都适用 简称ES6
+-->
+<body>
+    <div id="app">
+
+    </div>
+    <script src="../js/vue.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script>
+
+        function fun(){
+            for (let i=0;i<9;i++){
+                console.log(i)
+            }
+        }
+        //箭头函数没有参数必须加圆括号，只有一个参数可以不加圆括号，多个参数也要加圆括号
+        //3.函数体中只有一行代码可以不写{}
+        //4.箭头函数和原来的函数最大区别，箭头函数没有自己的this，匿名函数有自己的this 极大的简化了
+        axios.get().then((res)=>{
+
+        }).catch((err)=>{
+
+        })
+        //es6 :1.变量声明 let const 推荐使用这两个 （var 声明的变量 在javascript存在作用范围混淆的问题）
+        //let 用来声明局部变量  好处：从声明处开始到代码块结束的作用范围
+        //const 用来声明js中的常量，一旦被赋值不能被修改 对象一般用const来修饰，只是说地址不变
+        //属性还是可以变的，数组也是对象，也要用const，数组的地址不能改变，数组的元素可以改变
+
+        //es6 :2匿名函数，推荐我们使用箭头函数 (参数)=>{} 一般是在匿名函数作参数的时候使用
+
+        //es6 :3模版字符串 反引号``
+        let html = `<div>
+                        <h1>我是小黑</h1>
+                        <button @click="haha)"></button>
+                    </div>`
+        console.log(html)
+
+
+        //es6 :4对象的定义：如果属性名和变量名一致写一个即可
+        let id =21
+        let name = 'hyn'
+        let age = 22
+        const student = {id,name,age} //组件中用的非常多呀
+        console.log(student);
+        new Vue({
+            el: '#app',
+            data: {
+
+            },
+            components:{
+
+            }
+        })
+    </script>
+</body>
+
+</html>

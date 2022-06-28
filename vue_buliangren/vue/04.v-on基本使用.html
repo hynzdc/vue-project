@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{msg}}</h1>
+<!--        js事件三要素：事件源： 发生特定动作的html标签
+            事件 ；发生的特定动作
+            监听器： 事件处理
+            vue 在对应的-->
+        <button v-on:click="test">点我</button>
+
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                msg:'hello vue'
+            },
+            methods:{
+               test:function (){
+                   alert('vue 中的test')
+               }
+            }
+        })
+    </script>
+</body>
+
+</html>

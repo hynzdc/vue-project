@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{msg}}</h2>
+        <!--<a href="#/login">用户登录</a>-->
+        <!--<a href="#/register">用户注册</a>-->
+        <!--标签上必须加to属性-->
+        <router-link to="/login">用户登录</router-link>
+        <router-link to="/register">用户注册</router-link>
+        <router-view></router-view>
+        <!--切换路由标签-->
+        <router-link :to="{path:'/login'}">用户登录</router-link>
+        <router-link :to="{path:'/register'}">用户注册</router-link>
+        <br>
+        <!--根据名称切换路由  推荐使用命名路由-->
+        <router-link :to="{name:'login'}">用户登录</router-link>
+        <router-link :to="{name:'register'}">用户注册</router-link>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script src="../js/vue-router.js"></script>
+    <script>
+        const login = {
+            template: `<div><h2>用户登录</h2></div>`
+        }
+        const register = {
+            template: `<div><h2>用户注册</h2></div>`
+        }
+        const router = new VueRouter({
+            routes: [
+                {path:'/',redirect:'/login'},
+                {path: '/login',component:login,name:'login'},
+                {path: '/register',component: register,name:'register'}
+            ]
+        })
+        new Vue({
+            el: '#app',
+            data: {
+                msg: 'router-link'
+            },
+            methods:{},
+            router
+        })
+    </script>
+</body>
+
+</html>

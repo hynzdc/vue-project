@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+<!--        显示路由组件 哈希路由不用写前面加个#就可以了-->
+
+        <a href="#/login">用户登录</a>
+        <a href="#/register">用户注册</a>
+        <router-view></router-view>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script src="../js/vue-router.js"></script>
+    <script>
+
+        const login ={
+            template:`<div><h3>用户登录</h3></div>`
+        }
+        const register = {
+            template: `<div><h3>用户注册</h3></div>`
+        }
+        const notFound = {
+            template:`<div><h3>404 NotFound</h3></div>`
+        }
+        //1.创建路由规则对象
+        const vueRouter = new VueRouter({
+            routes:[//配置路由规则  重定向
+                {path: '/',redirect:'/login'},
+                {path:'/login',component:login},
+                {path:'/register',component: register},
+                {path: '*',component: notFound}//这个必须放到最后
+            ]
+        });
+        //2.在vue里面注册路由
+        new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods:{},
+            router:vueRouter//注册路由
+        })
+    </script>
+</body>
+
+</html>

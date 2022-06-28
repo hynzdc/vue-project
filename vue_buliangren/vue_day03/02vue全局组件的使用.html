@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <login></login>
+        <register></register>
+        <add></add>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        //定义一个全局组件
+        //参数一：组件名称 参数2:配置对象
+        Vue.component('login',{
+            template:`<div><h2>用户登录</h2> <form action=""></form></div>`,
+        });
+
+        Vue.component('register',{
+            template: `<div><h2>用户注册</h2> <form action=""></form></div>`
+        })
+        new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods:{
+
+            },
+            components:{//注册局部组件
+                add:{
+                    template:`<div><h2>用户添加</h2> <form action=""></form></div>`
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

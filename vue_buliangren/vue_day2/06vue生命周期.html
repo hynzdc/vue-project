@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        //vue实例生命周期过程中官方提供了一系列周期钩子：这些生命周期函数最大的特点就是会伴随着不vue
+        //的创建使用销毁过程 自动触发
+        new Vue({
+            el: '#app',
+            data: {
+                msg:'vue 生命周期'
+            },
+            methods:{
+
+            }
+        })
+    </script>
+</body>
+
+</html>

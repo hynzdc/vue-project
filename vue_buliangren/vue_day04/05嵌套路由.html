@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+<div id="app">
+    <a href="#/users/useradd">增加用户</a>
+    <router-view></router-view>
+    <router-link :to="{name:'users'}">用户列表</router-link>
+
+</div>
+<template id="users">
+    <div>
+        <table border="1px">
+            <tr>
+                <td>id</td>
+                <td>name</td>
+                <td>salary</td>
+                <td>age</td>
+                <td>操作</td>
+            </tr>
+            <tr v-for="(user,index) in users" :key="user.id">
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.salary}}</td>
+                <td>{{user.age}}</td>
+                <td><a href="">删除</a> <router-link :to="{name:'useredit',query:{id:user.id}}">修改</router-link></td>
+            </tr>
+            <!--展示子路由标签-->
+            <router-view></router-view>
+        </table>
+    </div>
+</template>
+<template id = 'add'>
+    <div>
+        <form>
+            姓名：<input type="text"><br>
+            年龄: <input type="text"><br>
+            工资: <input type="text"><br>
+            <input type="button" value="提交">
+        </form>
+    </div>
+</template>
+<template id = 'edit'>
+    <div>
+        <form>
+            编号：<input type="text" v-model="user.id"><br>
+            姓名：<input type="text" v-model="user.name"><br>
+            年龄: <input type="text" v-model="user.age"><br>
+            工资: <input type="text" v-model="user.salary"><br>
+            <input type="button" value="提交" @click="editUser">
+        </form>
+    </div>
+</template>
+<script src="../js/vue.js"></script>
+<script src="../js/vue-router.js"></script>
+<script src="../js/axios.min.js"></script>
+<script>
+    //定义用户列表
+    const users = {
+        template: '#users',
+        data(){
+            return{
+                users:[]
+            }
+        },
+        created(){
+            this.users = [
+                {id:1,name:'hyn',salary:100,age:23}
+            ]
+        }
+    }
+
+    const useradd = {
+        template: `#add`
+    }
+
+    const useredit = {
+        template:'#edit',
+        data() {
+            return {
+                user:{}
+            }
+        },
+        methods:{
+            editUser(){
+                // axios.post('url',this.user).then(res=>{
+                //     this.user = {}
+                //     this.$router.push({name:'users'})
+                // })
+                this.$router.push({name:'users'})
+            }
+        },
+        created() {
+            console.log(this.$route.query.id);
+            let id = this.$route.query.id
+            //axios.get('url?id='+id).then(res=>this.user=res.data);
+            this.user = {id:id,name:'小城',age:23,salary: 2333}
+        }
+    }
+
+    const router = new VueRouter({
+        routes: [
+            //{path: '/',redirect:'/users'},
+            {path: '/users', name: 'users', component: users,
+                children:[//嵌套子组件路由,子路由不能有/
+                    {path: 'useradd',name:'useradd',component: useradd},
+                    {path: 'useredit',name: 'useredit',component: useredit}
+                ]
+            },
+        ]
+    });
+    new Vue({
+        el: '#app',
+        data: {
+            user:{}
+        },
+        methods: {
+
+        },
+        router
+    })
+</script>
+</body>
+
+</html>

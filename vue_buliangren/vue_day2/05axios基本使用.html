@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script src="../js/axios.min.js"></script>
+<script>
+    //发送get请求
+   // axios.get('http://localhost:8081/demo?id=1&name=xiaoning')
+   //  .then(function (response){
+   //      console.log(response.data)
+   //  }).catch(function (err){
+   //      console.log(err)
+   // });
+
+   //发送一个post方式
+   //  axios.post('http://localhost:8081/test',{id:21,name:"xiaoning"}).then(function (res){
+   //      console.log(res.data)
+   //  }).catch(function (err){
+   //      console.log(err)
+   //  })
+
+   //  axios.put('http://localhost:8081/test2',{id:22,name:"xiaozhu"}).then(function (res){
+   //      console.log(res.data)
+   //  }).catch(function (err){
+   //      console.log(err)
+   //  })
+    //创建axios配置对象
+    var instance = axios.create({
+        baseURL:'http://localhost:8081/',
+        timeout:5000
+    });
+
+    //请求拦截器
+    instance.interceptors.request.use(function (config){
+        console.log("request")
+        console.log(config);
+        if (config.url.indexOf("?")==-1) {
+            config.url+="?token=1234"
+        }else {
+            //业务修改
+            config.url+='&token=1234'
+        }
+        return config
+    })
+
+    //相应拦截器
+    instance.interceptors.response.use(function (response){
+        console.log("进入响应拦截器",response);
+        response.data = "xxxx"
+        if (!response.status==200){
+            alert('服务器出现错误')
+        }
+        return response
+    })
+    instance.get('demo?id=1&name=haha').then(function (res){
+        console.log(res.data)
+    }).catch(function (err){
+        console.log(err)
+    })
+</script>
+</html>

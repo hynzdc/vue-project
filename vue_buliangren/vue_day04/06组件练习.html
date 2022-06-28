@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<template id="student">
+    <div>
+        <table border="1">
+            <tr>
+                <td>编号</td>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>操作</td>
+            </tr>
+            <tr v-for="(student,index) in students" :key="student.id">
+                <td>{{student.id}}</td>
+                <td>{{student.name}}</td>
+                <td>{{student.age}}</td>
+
+            </tr>
+        </table>
+    </div>
+</template>
+
+<template>
+    <div>
+        <form>
+
+        </form>
+    </div>
+</template>
+
+<body>
+    <div id="app">
+        <router-view></router-view>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script src="../js/vue-router.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script>
+        const student = {
+            template:'#student',
+            data(){
+                return{
+                    students:[
+                        {id:1,name: 'hyn',age:12},
+                        {id:2,name: 'zbj',age: 12}
+                    ]
+                }
+            }
+        }
+        const teacher = {
+
+        }
+        const router = new VueRouter({
+            routes:[
+                {path: '/',redirect:'/student'},
+                {path:'/student',name:'student',component:student}
+            ]
+        });
+        new Vue({
+            el: '#app',
+            data: {
+
+            },
+            router
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!---->
+    <div id="app">
+        <span v-for="value,key,index in user">{{index}}={{key}}={{value}}   </span>
+        <!--遍历数组-->
+        <ul>
+            <li v-for="(item,index) in arr">{{index+1}}--{{item}}</li>
+        </ul>
+        <!--遍历数组对象 -->
+        <table border="1px" width="300">
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>内容</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="(user,index) in users" :key="user.id">
+                <th>{{user.id}}</th>
+                <th>{{user.name}}</th>
+                <th>{{user.age}}</th>
+                <th>{{user.content}}</th>
+                <th><a href="">删除</a><a href="">修改</a></th>
+            </tr>
+        </table>
+
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                user:{
+                    id: 21,
+                    name: 'xiaoning',
+                    age: 21
+                },
+                arr:["北京校区", "天津校区", "河南校区"],
+                users:[
+                    {id:"1",name:"xiaochen",age:23,content:"我曾经也是一个单纯的少年!"},
+                    {id:"2",name:"小白",age:23,content:"我曾经是一个邪恶的少年!"},
+                ]
+            }
+        })
+    </script>
+</body>
+
+</html>

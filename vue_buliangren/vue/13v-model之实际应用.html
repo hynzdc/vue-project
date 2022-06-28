@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <form action="">
+            用户名：<input type="text" v-model="user.username">
+            密 码：<input type="text" v-model="user.password">
+            邮箱:<input type="text" v-model="user.email">
+            QQ:<input type="text" v-model="user.qq">
+            验证码:<input type="text" v-model="user.captcha">
+            <input type="button" @click="reg" value="注册">
+        </form>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                user:{},
+            },
+            methods:{
+                reg(){
+                    console.log(this.user)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

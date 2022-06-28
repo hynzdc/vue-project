@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>年龄：{{count}}</h1>
+        <button v-on:click="increasedAge">每次给年龄➕1</button>
+        <button v-on:click="changeAge(20)">每次给年龄+不确定</button>
+        <button v-on:click="changeAgeAndMsg({count:2,msg:'wozhendecai'})">每次给年龄加不确定，同时msg➕你好</button>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                count:0,
+                msg:'hello vue'
+            },
+            methods:{
+                increasedAge:function (){
+                    this.count++;
+                },
+                changeAge:function (count){
+                    this.count +=count;
+                },
+                changeAgeAndMsg:function (param){
+                    this.count+=param.count
+                    this.msg += param.msg
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

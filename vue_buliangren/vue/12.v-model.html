@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<!--model 模型 和v-bind 有点像 用来将html标签的value属性进行绑定，交给vue来进行管理-->
+<!--v-bind 作用：用来将html标签属性来进行绑定，除了value属性以外的所有属性，只有表单元素
+有value元素，所以v-model主要用在表单呀，最能体现双向绑定机制的一个指令
+,语法在表单元素上直接加入v-model="vue实例中一个变量"-->
+
+<body>
+    <div id="app">
+        {{msg}}
+        <input type="text" v-model="msg">
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                msg:'hello vue'
+            }
+        })
+    </script>
+</body>
+
+</html>

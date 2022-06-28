@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        编号：<input type="text" v-model="item.id">
+        名称：<input type="text" v-model="item.name">
+        价格：<input type="text" v-model="item.price">
+        数量：<input type="text" v-model="item.count">
+        <button @click="addCart">添加到购物车</button>
+        <br>
+        <br>
+        <table border="1">
+            <tr>
+                <th>选择商品</th>
+                <th>名称</th>
+                <th>单价</th>
+                <th>购买数量</th>
+                <th>小记</th>
+            </tr>
+            <tr v-for="(item,index) in items" :key="item.id">
+                <th>{{item.id}}</th>
+                <th>{{item.name}}</th>
+                <th>{{item.price}}</th>
+                <th><input type="button" value="+" @click="increaseCount(index)"> {{item.count}} <input type="button" value="-" @click="reduce(index)"></th>
+                <th>{{(item.count*item.price).toFixed(2)}}</th>
+            </tr>
+        </table>
+        <h3>总价格：{{(totalPrice()).toFixed(2)}}</h3>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                msg:'购物车案例',
+                item:{},
+                items:[
+                    {id:1,name:'iphone12',price:19.9,count:1,},
+                    {id:2,name:'iphone15',price:18.9,count:1,}
+                ]
+            },
+            methods:{
+                increaseCount(idx){
+                    console.log(idx)
+                    this.items[idx].count++
+                },
+                reduce(idx){
+                    console.log(idx)
+                    if (this.items[idx].count<=1){
+                        alert('购买的商品不能小于1件')
+                        return false
+                    }
+                    this.items[idx].count--
+                },
+                totalPrice(){
+                    var  totalPrice = 0
+                    for (var i = 0;i<this.items.length;i++){
+                        totalPrice += this.items[i].count*this.items[i].price
+                    }
+                    return totalPrice
+                },
+                addCart(){
+                    console.log(this.item)
+                    if (!this.item.id){alert('请输入编号');return false;}
+                    if (!this.item.name){alert('请输入名称');return false;}
+                    if (!this.item.price){alert('请输入价格');return false;}
+                    if (!this.item.count){alert('请输入数量');return false;}
+                    if (this.item.count<=0){alert('请输入正确数量');return false;}
+                    this.items.push(this.item)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

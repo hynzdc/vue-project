@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+    <!--插槽 用来扩展现有的组件，让组件变得更加灵活 类似于usb接口
+        具名插槽：带有名字的
+        默认插槽
+    -->
+        <h1>{{msg}}</h1>
+        <login><span slot="bb">欢迎进入我的网站{{count}}</span></login>
+        <login><span slot="aa">welcome to my website {{msg}}</span></login>
+        <login>
+            <button @click="addCount" slot="aa">点我呀</button>
+        </login>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        const  login = {
+            template:'<div><slot name="bb"></slot><h3>用户登录</h3><slot name="aa"></slot></div>'
+        }
+        new Vue({
+            el: '#app',
+            data: {
+                msg:'插槽',
+                count:0
+            },
+            components:{
+                login,
+            },
+            methods:{
+                addCount(){
+                    this.count++
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

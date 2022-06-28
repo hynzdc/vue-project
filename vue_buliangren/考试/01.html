@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>购买商品详情描述</h1>
+        您购买了oppo手机共{{count}}台,¥{{price}}/台,此商品打{{discount}}折
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                model:'',
+                count:'',
+                price:'',
+                discount:'',
+                mailingCosts:''
+            },
+            computed:{
+                totalPrice(){
+                    return this.count * this.price
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

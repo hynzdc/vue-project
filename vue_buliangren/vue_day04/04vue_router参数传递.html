@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+<div id="app">
+    <h1>{{msg}}</h1>
+    <!--地址栏传参的两种方式
+    1.query string
+    2.restful  /2
+   -->
+    <!--切换路由 1.通过标签切换，2.在js切换-->
+    <router-view></router-view>
+    <a href="#/login?name=hyn&age=12">用户登录</a>
+    <a href="#/register/21/hyn">用户注册</a>
+    <router-link :to="{path:'/login?name=hyn&age=12'}">用户登录呀呀</router-link>
+    <router-link :to="{name:'login',query:{name:'hyn',age:13}}">用户登录</router-link>
+    <!--restful-->
+    <br>
+    <h2>restful</h2>
+    <router-link to="/register/2/hyn">用户注册哦哦哦</router-link>
+    <router-link :to="{name:'register',params:{id:1,name:'hynzdc'}}">用户注册</router-link>
+    <button @click="login">用户登录</button>
+    <button @click="register">用户注册</button>
+</div>
+<script src="../js/vue.js"></script>
+<script src="../js/vue-router.js"></script>
+<script>
+    const login = {
+        template: `<div><h2>用户登录</h2></div>`,
+        created(){
+            console.log('created')
+            console.log(this.$route.query.name)
+            console.log(this.$route.query.age)
+        }
+    }
+    const register = {
+        template: `<div><h2>用户注册</h2></div>`,
+        created() {
+            console.log(this.$route.params.id);
+            console.log(this.$route.params.name);
+        }
+    }
+    const router = new VueRouter({
+        routes: [
+            {path:'/',redirect:'/login'},
+            {path: '/login',component:login,name:'login'},
+            {path: '/register/:id/:name',component: register,name:'register'}
+        ]
+    })
+    new Vue({
+        el: '#app',
+        data: {
+            msg:'在js中切换代码'
+        },
+        methods:{
+            //this.$route object 当前路由对象
+            //this.$router vueRouter 路由管理器对象
+            login(){
+                //发送axios请求完成登录切换主页
+                console.log(this.$route.name)
+                //用路由器对象来切换
+                //this.$router.push('/login')//切换路由
+                if (this.$route.name!='login'){
+                    this.$router.push({name:'login'})
+                }
+                //this.$router.push({push:''})
+            },
+            register(){
+                console.log(this.$route.name)
+                if (this.$route.name!='register'){
+                    this.$router.push({name:'register'})
+                }
+            }
+        },
+        router
+    })
+</script>
+</body>
+
+</html>

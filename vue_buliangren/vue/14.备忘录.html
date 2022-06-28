@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<!--1.数据交给vue
+2.添加
+3.删除
+4.清空
+5.查询总数
+-->
+<body>
+    <div id="app">
+        <h2>请输入内容:<input type="text" v-model="content"> <button @click="save">添加到备忘录</button></h2><br>
+        <ul v-if="list.length!=0">
+            <li v-for="(content,index) in list" :key="index">{{index+1}}-{{content}}<a href="javascript:;" @click="delContent(index)">删除</a></li>
+        </ul>
+        <ul v-if="list.length==0">
+            <li><span style="color: red">当前备忘录还没有任何数据</span></li>
+        </ul>
+        <h2 v-show="list.length!=0"><a href="javascript:;" @click="list = []"> 清空备忘录</a></h2>
+        <h2>当前备忘录共{{list.length}}条</h2>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                list:['今天晚上一起吃好吃的','今天晚上一起打游戏','今天晚上一起学习'],
+                content:''
+            },
+            methods:{
+                save(){
+                    console.log(this.content)
+                    if (!this.content){alert('请输入内容');return false;}
+                    this.list.push(this.content)
+                    this.content = ''
+                },
+                delContent(index) {
+                    console.log(index)
+                    this.list.splice(index,1)//根据下标删除
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

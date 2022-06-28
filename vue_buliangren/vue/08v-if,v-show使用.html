@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!--v-if v-show 变化快v-show 变化慢v-if-->
+        <h2 v-if="isShow">{{msg}}</h2>
+        <button @click="hidden()">隐藏h2标签</button>
+        <button @click="show()">显示h2标签</button>
+        <button @click="handover()">切换</button>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                msg:'hello vue',
+                isShow:true
+            },
+            methods:{
+                hidden(){
+                    this.isShow = false;
+                },
+                show(){
+                    this.isShow = true
+                },
+                handover(){
+                   this.isShow = !this.isShow
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

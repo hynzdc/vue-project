@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{count}}</h1>
+        <login :msg="msg"  name="xiaoning" @aa="testParent" @bb="testHehe"></login>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+// <!--
+//         使用组件传递事件，在对应的标签上传递事件即可 @key= value
+// -->
+        const login = {
+            template:`<div><h3>用户登陆{{msg}}--{{name}}</h3><button @click="testChild">点我调用父组件事件</button></div>`,
+            props:['msg','name'],
+            data(){
+                return{
+                    count:19
+                }
+            },
+            methods: {
+                testChild(){
+                    alert('我是子组件定义的事件')
+                    console.log(this)
+                    this.$emit('aa')//用来调用父组件传递过来的事件 参数1：调用的事件名
+                    this.$emit('bb',this.count)//通过传递参数来给父组件传递参数
+                }
+            }
+        }
+        new Vue({
+            el: '#app',
+            data: {
+                msg:'我是消息',
+                count:0
+            },
+            components:{
+                login
+            },
+            methods:{
+                testParent(){
+                    alert('我是父组件的事件')
+                },
+                testHehe(count){
+                    alert('hehe'+count)
+                    this.count = count
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

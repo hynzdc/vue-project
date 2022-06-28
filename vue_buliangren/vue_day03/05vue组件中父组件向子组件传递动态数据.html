@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!--向子组件传递动态数据 :key="name"-->
+        <input type="text" v-model="name">
+        <login :name="name" :msg="msg"></login>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        const login = {
+            template:`<div><h2>用户登录 {{name}}-{{msg}}</h2></div>`,
+            props:['name','msg']
+        }
+        new Vue({
+            el: '#app',
+            data: {
+                name:'我是vue实例管理的数据',
+                msg:'我是消息'
+            },
+            components:{
+                login
+            }
+
+        })
+    </script>
+</body>
+
+</html>

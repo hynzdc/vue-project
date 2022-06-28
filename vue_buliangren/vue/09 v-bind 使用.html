@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .aa{
+            width: 200px;
+            height: 200px;
+            border: #ff7965 solid;
+        }
+        .bb{
+            width: 150px;
+            height: 200px;
+            border: green dashed;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div v-bind:class="cls?'aa':'bb'"></div>
+        <button @click="changeClsAA">修改为aa</button>
+        <button @click="changeClsBB">修改为bb</button>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                cls:true
+            },
+            methods:{
+                changeClsAA(){
+                    this.cls = true
+                },
+                changeClsBB(){
+                    this.cls = false
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <login></login>
+        <register></register>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+
+        Vue.component('register',{
+            template:`<h2>全局组件{{msg}}</h2>`,
+            data() {
+                return{
+                    msg:'我是大帅哥'
+                };
+            }
+        })
+        const login = {
+            template:`<div><register></register><h2>用户登录</h2><h2>{{counter}}---{{msg}}---{{counterSqrt}}</h2><button @click="addCount(10)">点我count++</button><aa></aa></div>`,
+            data(){//组件中定义的data必须是一个函数
+                return{
+                    counter:0,
+                    msg:'我是组件'
+                }
+            },
+            methods:{
+                addCount(val){
+                    this.counter+=val
+                }
+            },
+            computed:{
+                counterSqrt(){
+                    return this.counter*this.counter
+                }
+            },
+            //初始化，运行，销毁
+            components:{
+                aa:{
+                    template: `<h2>测试</h2>`
+                }
+            }
+        }
+        new Vue({
+            el: '#app',
+            data: {
+                msg:'vue中定义组件的data，methods，computed'
+            },
+            components:{
+                login:login
+            }
+        })
+    </script>
+</body>
+
+</html>
